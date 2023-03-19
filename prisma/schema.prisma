@@ -11,43 +11,132 @@ datasource db {
   relationMode = "prisma"
 }
 
+// ############ USERS #############
+
 model User {
-  id      String    @id @default(uuid())
-  name    String
-  email   String    @unique
-  notes   Note[]
+  id            String            @id @default(uuid())
+
+  notes         Note[]
+  myBoards      Board[]
+  savedBoards   FollowingBoard[]
+  friends       Friend[]
+  comments      Comment[]
+  replies       Reply[]
+
+  name          String
+  email         String
+  password      String?
+  auth          AuthType
+  timestamp     DateTime          @default(now())
 }
 
-model Topic {
-  id        String    @id @default(uuid())
-  name      String
-  keywords  String
+model Friend {
+  id            String            @id @default(uuid())
+
+  user          User              @relation(fields: [userId], references: [id])
+  userId        String            
+
+  accepted      Boolean           @default(false)
+  blocked       Boolean           @default(false)
+  timestamp     DateTime          @default(now())
+
+  @@index([userId])
 }
+
+
+// ############# NOTES #############
 
 model Note {
-  id            String    @id @default(uuid())
-  user          User      @relation(fields: [userId], references: [id])
-  userId        String    @unique
+  id            String            @id @default(uuid())
+
+  author        User              @relation(fields: [authorId], references: [id])
+  authorId      String            
+  boards        Board[]
+  comments      Comment[]
+
   title         String
   description   String
   url           String
   source        String
   text          String?
-  boards        Board[]
-  timestamp    DateTime  @default(now())
+  timestamp     DateTime          @default(now())
+
+  @@index([authorId])
 }
 
+// ############# BOARDS #############
+
 model Board {
-  id            String    @id @default(uuid())
+  id            String            @id @default(uuid())
+
+  notes         Note[]
+  user          User              @relation(fields: [userId], references: [id])
+  userId        String            
+  following     FollowingBoard[]  
+
   title         String
   description   String
   type          BoardType
-  notes         Note[]
-  timestamp     DateTime  @default(now())
+  timestamp     DateTime          @default(now())
+
+  @@index([userId])
 }
+
+model FollowingBoard {
+  id            String            @id @default(uuid())
+
+  user          User              @relation(fields: [userId], references: [id])
+  userId        String            
+  board         Board             @relation(fields: [boardId], references: [id])
+  boardId       String            
+
+  timestamp     DateTime          @default(now())
+
+  @@index([userId])
+  @@index([boardId])
+}
+
+// ############# COMMENTS #############
+
+model Comment {
+  id            String            @id @default(uuid())
+  user          User              @relation(fields: [userId], references: [id])
+  userId        String            
+  note          Note              @relation(fields: [noteId], references: [id])
+  noteId        String  
+  replies       Reply[]          
+
+  text          String
+  timestamp     DateTime          @default(now())
+
+  @@index([userId])
+  @@index([noteId])
+}
+
+model Reply {
+  id            String            @id @default(uuid())
+  user          User              @relation(fields: [userId], references: [id])
+  userId        String  
+  comment       Comment           @relation(fields: [commentId], references: [id])
+  commentId     String
+
+  text          String
+  timestamp     DateTime          @default(now())
+
+  @@index([userId])
+  @@index([commentId])
+}
+
+// ############# ENUMS #############
 
 enum BoardType {
   MESSAGE
   PRIVATE
   PUBLIC
+}
+
+enum AuthType {
+  GOOGLE
+  APPLE
+  CREDENTIALS
 }
