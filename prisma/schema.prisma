@@ -11,123 +11,169 @@ datasource db {
   relationMode = "prisma"
 }
 
-// ############ USERS #############
+// ############## AUTHENTICATION ##################
+
+model Account {
+  id                String    @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?   @db.Text
+  access_token      String?   @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?   @db.Text
+  session_state     String?
+
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id            String    @id @default(cuid())
+  sessionToken  String    @unique
+  userId        String
+  expires       DateTime
+
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier  String
+  token       String    @unique
+  expires     DateTime
+
+  @@unique([identifier, token])
+}
+
+// #################### USERS #####################
 
 model User {
-  id            String            @id @default(uuid())
+  id            String        @id @default(cuid())
 
+  name          String?
+  email         String?       @unique
+  emailVerified DateTime?
+  image         String?
+  timestamp     DateTime      @default(now())
+
+  accounts      Account[]
+  sessions      Session[]
   notes         Note[]
   myBoards      Board[]
   savedBoards   FollowingBoard[]
   friends       Friend[]
   comments      Comment[]
   replies       Reply[]
-
-  name          String
-  email         String
-  password      String?
-  auth          AuthType
-  timestamp     DateTime          @default(now())
 }
 
 model Friend {
-  id            String            @id @default(uuid())
+  id            String     @id @default(cuid())
 
-  user          User              @relation(fields: [userId], references: [id])
   userId        String            
+  accepted      Boolean    @default(false)
+  blocked       Boolean    @default(false)
+  timestamp     DateTime   @default(now())
 
-  accepted      Boolean           @default(false)
-  blocked       Boolean           @default(false)
-  timestamp     DateTime          @default(now())
+  user          User       @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
 
 
-// ############# NOTES #############
+// ##################### NOTES #####################
 
 model Note {
-  id            String            @id @default(uuid())
-
-  author        User              @relation(fields: [authorId], references: [id])
-  authorId      String            
-  boards        Board[]
-  comments      Comment[]
-
+  id            String     @id @default(cuid())
+  userId        String            
   title         String
   description   String
   url           String
   source        String
   text          String?
-  timestamp     DateTime          @default(now())
+  timestamp     DateTime   @default(now())
 
-  @@index([authorId])
+  boards        Board[]
+  comments      Comment[]
+
+  user          User       @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
-// ############# BOARDS #############
+// #################### BOARDS #####################
 
 model Board {
-  id            String            @id @default(uuid())
+  id            String            @id @default(cuid())
 
-  notes         Note[]
-  user          User              @relation(fields: [userId], references: [id])
   userId        String            
-  following     FollowingBoard[]  
-
+  type          BoardType
   title         String
   description   String
-  type          BoardType
   timestamp     DateTime          @default(now())
+
+  following     FollowingBoard[]  
+  notes         Note[]
+
+  user          User              @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
 
 model FollowingBoard {
-  id            String            @id @default(uuid())
+  id          String    @id @default(cuid())
 
-  user          User              @relation(fields: [userId], references: [id])
-  userId        String            
-  board         Board             @relation(fields: [boardId], references: [id])
-  boardId       String            
+  userId      String            
+  boardId     String            
+  timestamp   DateTime  @default(now())
 
-  timestamp     DateTime          @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+  board       Board     @relation(fields: [boardId], references: [id])
 
   @@index([userId])
   @@index([boardId])
 }
 
-// ############# COMMENTS #############
+// #################### COMMENTS #####################
 
 model Comment {
-  id            String            @id @default(uuid())
-  user          User              @relation(fields: [userId], references: [id])
-  userId        String            
-  note          Note              @relation(fields: [noteId], references: [id])
-  noteId        String  
-  replies       Reply[]          
+  id          String    @id @default(cuid())
+  userId      String          
+  noteId      String  
+  text        String
+  timestamp   DateTime  @default(now())
 
-  text          String
-  timestamp     DateTime          @default(now())
+  replies     Reply[]    
+
+  note        Note      @relation(fields: [noteId], references: [id])
+  user        User      @relation(fields: [userId], references: [id])
 
   @@index([userId])
   @@index([noteId])
 }
 
 model Reply {
-  id            String            @id @default(uuid())
-  user          User              @relation(fields: [userId], references: [id])
-  userId        String  
-  comment       Comment           @relation(fields: [commentId], references: [id])
-  commentId     String
+  id          String    @id @default(cuid())
 
-  text          String
-  timestamp     DateTime          @default(now())
+  userId      String  
+  commentId   String
+  text        String
+  timestamp   DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id])
+  comment     Comment   @relation(fields: [commentId], references: [id])
 
   @@index([userId])
   @@index([commentId])
 }
 
-// ############# ENUMS #############
+// ##################### ENUMS #####################
 
 enum BoardType {
   MESSAGE
