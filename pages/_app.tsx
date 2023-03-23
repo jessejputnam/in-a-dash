@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react";
 
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import Header from "@/components/Header";
 
 export default function App({
   Component,
@@ -41,6 +42,7 @@ export default function App({
         <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#ffffff' />
       </Head>
+      <Header />
       <Component {...pageProps} />
     </SessionProvider>
   );

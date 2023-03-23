@@ -1,13 +1,11 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 
-import styles from "@/styles/Home.module.css";
-
 export default function Home() {
   const { data: session } = useSession();
 
   return (
     <>
-      <main className={styles.main}>
+      <main>
         {!session ? (
           <div>
             <p>Not signed in</p>

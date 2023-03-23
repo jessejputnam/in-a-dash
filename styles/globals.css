@@ -1,6 +1,9 @@
 :root {
   --font-primary: "Roboto Condensed", sans-serif;
-  --font-heading: "Yellowtail", cursive;
+  --font-cursive: "Yellowtail", cursive;
+
+  --red: #ef233c;
+
   --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
   --secondary-glow: linear-gradient(
     to bottom right,
@@ -17,12 +20,18 @@
     #00000010,
     #00000080
   );
+
+  --max-width: 1100px;
+  --border-radius: 12px;
+
+  font-size: 16px;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: var(--font-primary);
 }
 
 html,
@@ -34,4 +43,9 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.btn {
+  padding: 5px 10px;
+  font-size: 1rem;
 }
