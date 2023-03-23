@@ -57,8 +57,7 @@
   <summary>Server</summary>
   <ul>
     <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <!-- <li><a href="https://www.apollographql.com/">Apollo</a></li> -->
+    <li><a href="https://www.prisma.io/">Prisma</a></li>
   </ul>
 </details>
 
