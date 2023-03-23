@@ -63,6 +63,8 @@ model User {
   image         String?
   timestamp     DateTime      @default(now())
 
+  topics        Topic[]
+
   accounts      Account[]
   sessions      Session[]
   notes         Note[]
@@ -81,11 +83,19 @@ model Friend {
   blocked       Boolean    @default(false)
   timestamp     DateTime   @default(now())
 
-  user          User       @relation(fields: [userId], references: [id])
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
+
+// ##################### USER PREFS #####################
+
+model Topic {
+  id        String    @id @default(cuid())
+  keyword   String
+  user      User[]
+}
 
 // ##################### NOTES #####################
 
@@ -102,7 +112,7 @@ model Note {
   boards        Board[]
   comments      Comment[]
 
-  user          User       @relation(fields: [userId], references: [id])
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
@@ -121,7 +131,7 @@ model Board {
   following     FollowingBoard[]  
   notes         Note[]
 
-  user          User              @relation(fields: [userId], references: [id])
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
@@ -133,8 +143,8 @@ model FollowingBoard {
   boardId     String            
   timestamp   DateTime  @default(now())
 
-  user        User      @relation(fields: [userId], references: [id])
-  board       Board     @relation(fields: [boardId], references: [id])
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  board       Board     @relation(fields: [boardId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([boardId])
@@ -144,15 +154,15 @@ model FollowingBoard {
 
 model Comment {
   id          String    @id @default(cuid())
-  userId      String          
+  userId      String?      
   noteId      String  
   text        String
   timestamp   DateTime  @default(now())
 
   replies     Reply[]    
 
-  note        Note      @relation(fields: [noteId], references: [id])
-  user        User      @relation(fields: [userId], references: [id])
+  note        Note      @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  user        User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@index([userId])
   @@index([noteId])
@@ -161,13 +171,13 @@ model Comment {
 model Reply {
   id          String    @id @default(cuid())
 
-  userId      String  
+  userId      String?  
   commentId   String
   text        String
   timestamp   DateTime  @default(now())
 
-  user        User      @relation(fields: [userId], references: [id])
-  comment     Comment   @relation(fields: [commentId], references: [id])
+  user        User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
+  comment     Comment   @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([commentId])
