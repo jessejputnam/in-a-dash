@@ -24,13 +24,9 @@
   - [Color Reference](#color-reference)
   - [Environment Variables](#environment-variables)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Run Locally](#run-locally)
 - [Usage](#usage)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-  - [Code of Conduct](#code-of-conduct)
 - [License](#license)
 - [Contact](#contact)
 - [Acknowledgements](#acknowledgements)
@@ -110,10 +106,6 @@ To run this project, you will need to add the following environment variables to
 ## Getting Started
 
 <!-- Prerequisites -->
-
-### Prerequisites
-
-<!-- Installation -->
 
 ### Installation
 
