@@ -97,10 +97,13 @@
 ### Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
+`DATABASE_URL`
 
-`API_KEY`
+`NEXTAUTH_SECRET`
+`NEXTAUTH_URL`
 
-`ANOTHER_API_KEY`
+`GOOGLE_CLIENT_ID`
+`GOOGLE_CLIENT_SECRET`
 
 <!-- Getting Started -->
 
@@ -110,22 +113,9 @@ To run this project, you will need to add the following environment variables to
 
 ### Prerequisites
 
-This project uses Yarn as package manager
-
-```bash
- npm install --global yarn
-```
-
 <!-- Installation -->
 
 ### Installation
-
-Install my-project with npm
-
-```bash
-  yarn install my-project
-  cd my-project
-```
 
 <!-- Run Locally -->
 
@@ -134,7 +124,7 @@ Install my-project with npm
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git
+  git clone https://github.com/jessejputnam/in-a-dash
 ```
 
 Go to the project directory
@@ -146,13 +136,13 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  yarn install
+  npm install
 ```
 
 Start the server
 
 ```bash
-  yarn start
+  npm run dev
 ```
 
 <!-- Usage -->
@@ -169,52 +159,40 @@ function App() {
 }
 ```
 
-<!-- Roadmap -->
-
-## Roadmap
-
-- [x] Todo 1
-- [ ] Todo 2
-
-<!-- Contributing -->
-
-## Contributing
-
-<a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-<!-- Code of Conduct -->
-
-### Code of Conduct
-
-Please read the [Code of Conduct](https://github.com/Louis3797/awesome-readme-template/blob/master/CODE_OF_CONDUCT.md)
-
 <!-- License -->
 
 ## License
 
-Distributed under the no License. See LICENSE.txt for more information.
+MIT License
+
+Copyright (c) [2023] [Jesse Putnam]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 <!-- Contact -->
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Jesse Putnam - [@jputnam1200](https://twitter.com/jputnam1200) - jessejputnam@gmail.com
 
-Project Link: [https://github.com/Louis3797/awesome-readme-template](https://github.com/Louis3797/awesome-readme-template)
+Project Link: [https://github.com/jessejputnam/in-a-dash](https://github.com/jessejputnam/in-a-dash)
 
 <!-- Acknowledgments -->
 
 ## Acknowledgements
-
-Use this section to mention useful resources and libraries that you have used in your projects.
-
-- [Shields.io](https://shields.io/)
-- [Awesome README](https://github.com/matiassingers/awesome-readme)
-- [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
-- [Readme Template](https://github.com/othneildrew/Best-README-Template)
