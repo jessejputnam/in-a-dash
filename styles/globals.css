@@ -10,12 +10,15 @@
   --dark-blue: #1d3557;
   --green: #57cc99;
 
+  --profile-gray: #ffffff;
+  --light-box-shadow: rgba(0, 0, 0, 0.079);
+
   --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
   --secondary-glow: linear-gradient(
     to bottom right,
     rgba(1, 65, 255, 0),
-    rgba(1, 65, 255, 0),
-    rgba(1, 65, 255, 0.3)
+    #ef233b10,
+    #ef233b53
   );
   --tile-border: conic-gradient(
     #00000080,

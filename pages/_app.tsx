@@ -1,14 +1,15 @@
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 
-import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import Header from "@/components/sections/Header";
+import type { Session } from "next-auth";
+
+import "@/styles/globals.css";
 
 export default function App({
   Component,
-  pageProps: { session, pageProps }
-}: AppProps) {
+  pageProps: { session, ...pageProps }
+}: AppProps<{ session: Session }>) {
   return (
     <SessionProvider session={session}>
       <Head>
@@ -16,6 +17,7 @@ export default function App({
           name='description'
           content='News/article/post/video aggregator dashboard for personalized topics and ability to share/follow/interact with other users and their posts/boards.'
         />
+        <title>In a Dash</title>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
 
         <link
@@ -42,7 +44,7 @@ export default function App({
         <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#ffffff' />
       </Head>
-      <Header />
+
       <Component {...pageProps} />
     </SessionProvider>
   );

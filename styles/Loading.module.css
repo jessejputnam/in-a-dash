@@ -1,0 +1,4 @@
+.Loading {
+  position: absolute;
+  background: var(--primary-glow);
+}
