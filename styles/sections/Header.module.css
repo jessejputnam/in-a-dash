@@ -1,10 +1,31 @@
 .Header {
-  height: 60px;
   box-shadow: 0 1px 2px 0px var(--light-box-shadow);
+  height: 60px;
+  width: 100%;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  /* padding-right: 25px;  */
+  /* opacity: 0;
+  transition: 0.3s; */
+}
+
+.loading,
+.loaded {
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-right: 25px;
+  position: relative;
+  top: 0px;
+  opacity: 1;
+  overflow: hidden;
+  transition: all 0.3s ease-in;
+}
+
+.loading {
+  opacity: 0;
 }
 
 .profileBackground {
