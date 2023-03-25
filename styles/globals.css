@@ -10,9 +10,18 @@
   --dark-blue: #1d3557;
   --green: #57cc99;
 
-  --profile-gray: #ffffff;
+  --profile-gray: #ededed;
   --light-box-shadow: rgba(0, 0, 0, 0.079);
+  --dark-box-shadow: rgba(0, 0, 0, 0.405);
 
+  --loading: linear-gradient(
+    to right,
+    #ff3019 0%,
+    #ff3019 30%,
+    #e2b04a 50%,
+    #ff3019 80%,
+    #ff3019 100%
+  );
   --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
   --secondary-glow: linear-gradient(
     to bottom right,

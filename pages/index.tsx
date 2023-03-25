@@ -7,6 +7,11 @@ import Loading from "@/components/Loading";
 
 export default function Home() {
   const { data: session, status } = useSession();
+  const loading = status === "loading";
 
-  return <Layout>{!session ? <NoAuthHome /> : <AuthHome />}</Layout>;
+  return (
+    <Layout>
+      {loading ? <Loading /> : !session ? <NoAuthHome /> : <AuthHome />}
+    </Layout>
+  );
 }
