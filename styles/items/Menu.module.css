@@ -1,0 +1,28 @@
+.Menu {
+  position: absolute;
+  right: 0;
+  top: 61px;
+  height: 250px;
+  background-color: var(--gray);
+  width: 170px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.Menu * {
+  color: var(--dark-gray);
+  font-weight: 300;
+  font-size: 1.3rem;
+  text-align: right;
+  cursor: pointer;
+}
+
+.Menu li {
+  padding: 18px 25px;
+}
+
+@media (hover: hover) {
+  .hover:hover {
+    color: black;
+  }
+}

@@ -9,8 +9,10 @@
   --light-blue: #a8dadc;
   --dark-blue: #1d3557;
   --green: #57cc99;
+  --gray: #e9e9e9;
+  --dark-gray: #5d5d5d;
 
-  --profile-gray: #ededed;
+  --profile-image: #f18f8f;
   --light-box-shadow: rgba(0, 0, 0, 0.079);
   --dark-box-shadow: rgba(0, 0, 0, 0.405);
 
@@ -26,8 +28,8 @@
   --secondary-glow: linear-gradient(
     to bottom right,
     rgba(1, 65, 255, 0),
-    #ef233b10,
-    #ef233b53
+    #ef233b13,
+    #6e6e6e68
   );
   --tile-border: conic-gradient(
     #00000080,
@@ -110,4 +112,8 @@ a {
     color: white;
     background: var(--red);
   }
+}
+
+ul {
+  list-style: none;
 }

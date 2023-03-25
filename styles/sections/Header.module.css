@@ -33,6 +33,7 @@
   align-items: center;
   height: 55px;
   width: 55px;
+  cursor: pointer;
 }
 
 @media (hover: hover) {
@@ -42,14 +43,12 @@
 }
 
 .profile {
-  color: var(--profile-gray);
-  filter: drop-shadow(0 0 1px var(--dark-box-shadow));
-  font-size: 35px;
-  transition: color 0.2s;
+  color: var(--profile-image);
+  height: 35px;
 }
-/* 
+
 @media (hover: hover) {
   .profileBackground:hover .profile {
-    color: 
+    color: var(--red);
   }
-} */
+}
