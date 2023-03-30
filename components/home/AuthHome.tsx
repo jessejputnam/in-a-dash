@@ -4,6 +4,8 @@ import Loading from "../Loading";
 import Preview from "@/components/items/Preview";
 import { Article } from "@/lib/types";
 
+import styles from "@/styles/home/AuthHome.module.css";
+
 export default function AuthHome() {
   const [data, setData] = useState<Article[] | null>(null);
   const [isLoading, setLoading] = useState(false);
@@ -25,10 +27,10 @@ export default function AuthHome() {
   if (!data) return <p>No articles found</p>;
 
   return (
-    <div>
+    <div className={styles.AuthHome}>
       <h1>In a Dash</h1>
       <p>Dashboard service for personalized news, video, and posts</p>
-      <div>
+      <div className={styles.results}>
         {data.map((article) => (
           <div key={article.title}>
             <Preview {...article} />

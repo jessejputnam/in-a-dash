@@ -1,0 +1,11 @@
+.AuthHome {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
