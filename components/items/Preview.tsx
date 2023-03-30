@@ -10,7 +10,7 @@ export default function Preview(article: Article) {
 
   return (
     <div className={styles.Preview}>
-      <a className={styles.imgLink} href={article.url}>
+      <a className={styles.imgLink} href={article.url} target='_blank'>
         <Image
           className={styles.img}
           loader={() => src}
@@ -22,7 +22,7 @@ export default function Preview(article: Article) {
         />
       </a>
       <div className={styles.info}>
-        <a className={styles.titleLink} href={article.url}>
+        <a className={styles.titleLink} href={article.url} target='_blank'>
           <h3>{article.title.split(" - ")[0]}</h3>
         </a>
         <p>{article.description}</p>

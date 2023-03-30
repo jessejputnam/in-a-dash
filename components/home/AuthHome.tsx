@@ -1,41 +1,25 @@
 import { useState, useEffect } from "react";
 
-import Loading from "../Loading";
-import Preview from "@/components/items/Preview";
-import { Article } from "@/lib/types";
+import Link from "next/link";
 
 import styles from "@/styles/home/AuthHome.module.css";
 
 export default function AuthHome() {
-  const [data, setData] = useState<Article[] | null>(null);
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(
-      "https://newsapi.org/v2/top-headlines?country=us&apiKey=27882eab270a4721bb7308ae11dc6674"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setData(data.articles);
-        setLoading(false);
-      });
-  }, []);
-
-  if (isLoading) return <Loading />;
-  if (!data) return <p>No articles found</p>;
-
   return (
     <div className={styles.AuthHome}>
       <h1>In a Dash</h1>
       <p>Dashboard service for personalized news, video, and posts</p>
-      <div className={styles.results}>
-        {data.map((article) => (
-          <div key={article.title}>
-            <Preview {...article} />
-          </div>
-        ))}
+
+      <div>
+        <p>
+          <Link href='/articles'>Articles</Link>
+        </p>
+        <p>
+          <Link href='/articles'>Videos</Link>
+        </p>
+        <p>
+          <Link href='/articles'>Posts</Link>
+        </p>
       </div>
     </div>
   );

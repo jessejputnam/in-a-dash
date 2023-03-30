@@ -1,0 +1,19 @@
+.ArticlesPage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Articles {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.results {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+}

@@ -1,8 +1,9 @@
 import styles from "@/styles/items/Logo.module.css";
+import Link from "next/link";
 
 export default function Logo() {
   return (
-    <div className={styles.Logo}>
+    <Link href='/' className={styles.Logo}>
       <div className={styles.clipBar}></div>
       <div className={styles.barBox}>
         <div className={`${styles.bar} ${styles.top}`}></div>
@@ -10,6 +11,6 @@ export default function Logo() {
         <div className={`${styles.bar} ${styles.low}`}></div>
       </div>
       <p>D</p>
-    </div>
+    </Link>
   );
 }
