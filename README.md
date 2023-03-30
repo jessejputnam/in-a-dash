@@ -100,6 +100,9 @@ To run this project, you will need to add the following environment variables to
 `GOOGLE_CLIENT_ID`
 `GOOGLE_CLIENT_SECRET`
 
+`NEWS_API` - https://newsapi.org/
+`YOUTUBE_API`
+
 <!-- Getting Started -->
 
 ## Getting Started
