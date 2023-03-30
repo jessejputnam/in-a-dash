@@ -13,3 +13,12 @@ export interface Article {
   publishedAt: string | null;
   content: string | null;
 }
+
+export interface Video {
+  title: string;
+  channel: string;
+  description: string;
+  thumbnail: string;
+  viewCount: string;
+  url: string;
+}

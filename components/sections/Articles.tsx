@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Loading from "../Loading";
-import Preview from "@/components/items/Preview";
+import ArticlePreview from "@/components/items/ArticlePreview";
 import { Article } from "@/lib/types";
 
 import styles from "@/styles/pages/Articles.module.css";
@@ -17,7 +17,6 @@ export default function Articles() {
     fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${news_api}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setData(data.articles);
         setLoading(false);
       });
@@ -30,7 +29,7 @@ export default function Articles() {
     <div className={styles.results}>
       {data.map((article) => (
         <div key={article.title}>
-          <Preview {...article} />
+          <ArticlePreview {...article} />
         </div>
       ))}
     </div>

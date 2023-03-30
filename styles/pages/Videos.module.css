@@ -1,10 +1,10 @@
-.ArticlesPage {
+.VideosPage {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.Articles {
+.Videos {
   display: flex;
   flex-direction: column;
   gap: 15px;

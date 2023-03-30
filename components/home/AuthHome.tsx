@@ -15,10 +15,10 @@ export default function AuthHome() {
           <Link href='/articles'>Articles</Link>
         </p>
         <p>
-          <Link href='/articles'>Videos</Link>
+          <Link href='/videos'>Videos</Link>
         </p>
         <p>
-          <Link href='/articles'>Posts</Link>
+          <Link href='/posts'>Posts</Link>
         </p>
       </div>
     </div>
