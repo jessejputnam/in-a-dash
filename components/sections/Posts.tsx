@@ -21,14 +21,14 @@ export default function Posts() {
     fetch(`https://www.reddit.com/r/popular.json?limit=20`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data.children);
         const formattedData = data.data.children.map((post: any) => {
           return {
             title: post.data.title,
             subreddit: post.data.subreddit_name_prefixed,
             author: `u/${post.data.author}`,
             thumbnail:
-              post.data.thumbnail === "self"
+              post.data.thumbnail === "self" ||
+              post.data.thumbnail === "default"
                 ? noImage
                 : post.data.thumbnail === "nsfw"
                 ? nsfw
@@ -36,7 +36,6 @@ export default function Posts() {
             url: post.data.url
           };
         });
-        console.log(formattedData);
         setData(formattedData);
         setLoading(false);
       });
@@ -48,7 +47,7 @@ export default function Posts() {
   return (
     <div className={styles.results}>
       {data.map((post) => (
-        <div key={post.title + post.author}>
+        <div key={post.title + Math.random()}>
           <PostPreview {...post} />
         </div>
       ))}

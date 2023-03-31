@@ -7,14 +7,14 @@ export function Menu({ select }: any) {
   return (
     <ul className={styles.Menu}>
       <li>
-        <Link onClick={() => select()} className={styles.hover} href='#'>
+        <Link onClick={() => select()} className={styles.hover} href='/profile'>
           Profile
         </Link>
       </li>
       <hr />
       <li>
-        <Link onClick={() => select()} className={styles.hover} href='#'>
-          Settings
+        <Link onClick={() => select()} className={styles.hover} href='/boards'>
+          Boards
         </Link>
       </li>
       <hr />
