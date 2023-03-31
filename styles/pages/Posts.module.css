@@ -1,0 +1,26 @@
+.PostsPage {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Posts {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.results {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.results h3 {
+  font-size: 1.05rem;
+}
+.results p {
+  font-size: 0.9rem;
+}

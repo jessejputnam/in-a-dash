@@ -22,3 +22,11 @@ export interface Video {
   viewCount: string;
   url: string;
 }
+
+export interface Post {
+  title: string;
+  subreddit: string;
+  author: string;
+  thumbnail: string;
+  url: string;
+}
