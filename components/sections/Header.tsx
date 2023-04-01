@@ -41,10 +41,13 @@ export default function Header() {
           </div>
         ) : (
           <div
-            className={styles.profileBackground}
+            className={`${styles.profileBackground} ${menu ? styles.open : ""}`}
             onClick={() => setMenu(!menu)}
           >
-            <FontAwesomeIcon className={styles.profile} icon={faUser} />
+            <FontAwesomeIcon
+              className={`${styles.profile} ${menu ? styles.open : ""}`}
+              icon={faUser}
+            />
           </div>
         )}
       </div>

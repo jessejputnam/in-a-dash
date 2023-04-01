@@ -31,6 +31,12 @@
     #ef233b13,
     #6e6e6e68
   );
+  --secondary-glow-darker: linear-gradient(
+    to bottom right,
+    rgba(3, 33, 124, 0.221),
+    #30090e2f,
+    #1616168e
+  );
   --tile-border: conic-gradient(
     #00000080,
     #00000040,

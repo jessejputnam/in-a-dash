@@ -1,0 +1,63 @@
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 15px;
+}
+
+.profileImg {
+  border-radius: 50%;
+}
+
+.divider {
+  width: 60%;
+  margin: 10px 0;
+}
+
+.topicsContainer {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 500px;
+  margin-top: 25px;
+}
+
+.topics button {
+  background-color: var(--gray);
+  color: var(--dark-blue);
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.saveBtn {
+  width: 200px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  background: var(--dark-blue);
+  color: var(--light-blue);
+  border: none;
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .topics button:hover {
+    outline: solid 1px var(--blue);
+    color: black;
+  }
+
+  .saveBtn:hover {
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+  }
+}

@@ -55,6 +55,10 @@
   cursor: pointer;
 }
 
+.profileBackground.open {
+  background: var(--secondary-glow-darker);
+}
+
 @media (hover: hover) {
   .profileBackground:hover {
     background-position: 50%;
@@ -66,8 +70,16 @@
   height: 35px;
 }
 
+.profile.open {
+  color: rgba(101, 101, 101, 0.67);
+}
+
 @media (hover: hover) {
   .profileBackground:hover .profile {
     color: var(--red);
+  }
+
+  .profileBackground:hover .profile.open {
+    color: rgba(147, 37, 37, 0.67);
   }
 }
