@@ -1,9 +1,10 @@
 import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { GetServerSideProps } from "next";
-
+import { MouseEventHandler, useEffect } from "react";
+import { GetServerSidePropsContext } from "next";
 import Image from "next/image";
+
+import { ProfileProps } from "@/lib/types";
 
 import prisma from "@/prisma/prisma";
 
@@ -12,20 +13,46 @@ import Loading from "@/components/Loading";
 
 import styles from "@/styles/pages/profile.module.css";
 
-// export async function getServerSideProps() {
-//   const users = await prisma.user.findMany();
-//   return { users };
-// }
+export async function getServerSideProps({ req }: GetServerSidePropsContext) {
+  const session = await getSession({ req });
 
-export default function Profile() {
+  if (session) {
+    const user = await prisma.user.findUnique({
+      include: { topics: true },
+      where: {
+        email: session.user?.email as string
+      }
+    });
+
+    if (!user) return;
+
+    const user1 = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      image: user.image,
+      topics: user.topics
+    };
+
+    return { props: user1 };
+  }
+}
+
+const getId: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const target = event.currentTarget;
+  if (target) {
+    console.log(target.getAttribute("data-id"));
+    target.ariaPressed = target.ariaPressed === "true" ? "false" : "true";
+  }
+};
+
+export default function Profile(props: ProfileProps) {
   const { data: session, status } = useSession();
   const { push } = useRouter();
-  const loading = status === "loading";
+
+  // console.log("REQ", props);
 
   const user = session?.user;
-  const src =
-    user?.image ||
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
   useEffect(() => {
     if (!user) push("/");
@@ -33,17 +60,14 @@ export default function Profile() {
 
   if (!user)
     return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: "200px"
-        }}
-      >
+      <div className={styles.loadingContainer}>
         <Loading />
       </div>
     );
+
+  const src =
+    user.image ||
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
   return (
     <Layout>
@@ -72,31 +96,66 @@ export default function Profile() {
         <p>Choose up to three topics to follow:</p>
 
         <div className={styles.topics}>
-          <button id='business' aria-pressed='false'>
+          <button
+            id='business'
+            data-id={"clfzcgesv000608l04n7q2gd5"}
+            aria-pressed='false'
+            onClick={getId}
+          >
             #Business
           </button>
 
-          <button id='entertainment' aria-pressed='false'>
+          <button
+            id='entertainment'
+            data-id={"clfzce5jj000108l07be74phs"}
+            aria-pressed='false'
+            onClick={getId}
+          >
             #Entertainment
           </button>
 
-          <button id='general' aria-pressed='false'>
+          <button
+            id='general'
+            data-id={"clfzcenb9000208l0e3h0gazf"}
+            aria-pressed='false'
+            onClick={getId}
+          >
             #General
           </button>
 
-          <button id='health' aria-pressed='false'>
+          <button
+            id='health'
+            data-id={"clfzcf4hf000308l0539n3w2w"}
+            aria-pressed='false'
+            onClick={getId}
+          >
             #Health
           </button>
 
-          <button id='science' aria-pressed='false'>
+          <button
+            id='science'
+            data-id={"clfzcflgw000408l04sx5g6ar"}
+            aria-pressed='false'
+            onClick={getId}
+          >
             #Science
           </button>
 
-          <button id='sports' aria-pressed='false'>
+          <button
+            id='sports'
+            data-id={"clfzcfxvs000508l0cxhl4jwk"}
+            aria-pressed='false'
+            onClick={getId}
+          >
             #Sports
           </button>
 
-          <button id='technology' aria-pressed='false'>
+          <button
+            id='technology'
+            data-id={"clfzcgesv000608l04n7q2gd5"}
+            aria-pressed='false'
+            onClick={getId}
+          >
             #Technology
           </button>
         </div>

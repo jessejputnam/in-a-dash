@@ -1,5 +1,15 @@
+// PROPS
 export type LogoProps = "loader" | null;
 
+export interface ProfileProps {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  topics: Topic[];
+}
+
+// DATABASE OBJECTS
 export interface Article {
   source: {
     id: string;
@@ -29,4 +39,9 @@ export interface Post {
   author: string;
   thumbnail: string;
   url: string;
+}
+
+export interface Topic {
+  id: string;
+  keyword: string;
 }
