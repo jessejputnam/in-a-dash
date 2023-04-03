@@ -1,6 +1,6 @@
 import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { MouseEventHandler, useEffect } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { GetServerSidePropsContext } from "next";
 import Image from "next/image";
 
@@ -13,60 +13,60 @@ import Loading from "@/components/Loading";
 
 import styles from "@/styles/pages/profile.module.css";
 
-export async function getServerSideProps({ req }: GetServerSidePropsContext) {
+export async function getServerSideProps({
+  req,
+  res
+}: GetServerSidePropsContext) {
   const session = await getSession({ req });
 
-  if (session) {
-    const user = await prisma.user.findUnique({
-      include: { topics: true },
-      where: {
-        email: session.user?.email as string
-      }
+  if (!session) {
+    res.writeHead(302, {
+      Location: "/"
     });
-
-    if (!user) return;
-
-    const user1 = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      image: user.image,
-      topics: user.topics
-    };
-
-    return { props: user1 };
+    res.end();
+    return { props: {} };
   }
+  const user = await prisma.user.findUnique({
+    include: { topics: true },
+    where: {
+      email: session.user?.email as string
+    }
+  });
+
+  if (!user) return;
+
+  const props = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    image: user.image,
+    topics: user.topics
+  };
+
+  return { props };
 }
 
-const getId: MouseEventHandler<HTMLButtonElement> = (event) => {
-  const target = event.currentTarget;
-  if (target) {
-    console.log(target.getAttribute("data-id"));
-    target.ariaPressed = target.ariaPressed === "true" ? "false" : "true";
-  }
-};
+export default function Profile({ image, email, name, topics }: ProfileProps) {
+  // const { data: session } = useSession();
+  const [topicCount, setTopicCount] = useState(topics.length);
 
-export default function Profile(props: ProfileProps) {
-  const { data: session, status } = useSession();
-  const { push } = useRouter();
+  const getId: MouseEventHandler<HTMLButtonElement> = (event) => {
+    const btn = event.currentTarget;
+    const active = btn.ariaPressed;
 
-  // console.log("REQ", props);
+    if (btn.ariaPressed === "false") {
+      if (topicCount > 2) return;
 
-  const user = session?.user;
-
-  useEffect(() => {
-    if (!user) push("/");
-  }, [user, push]);
-
-  if (!user)
-    return (
-      <div className={styles.loadingContainer}>
-        <Loading />
-      </div>
-    );
+      setTopicCount(topicCount + 1);
+      btn.ariaPressed = "true";
+    } else {
+      setTopicCount(topicCount - 1);
+      btn.ariaPressed = "false";
+    }
+  };
 
   const src =
-    user.image ||
+    image ||
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
   return (
@@ -84,8 +84,8 @@ export default function Profile(props: ProfileProps) {
           />
         </div>
         <div>
-          <h1>{user?.name}</h1>
-          <p>{user?.email}</p>
+          <h1>{name}</h1>
+          <p>{email}</p>
         </div>
       </div>
 
@@ -97,8 +97,7 @@ export default function Profile(props: ProfileProps) {
 
         <div className={styles.topics}>
           <button
-            id='business'
-            data-id={"clfzcgesv000608l04n7q2gd5"}
+            id='clfzcgesv000608l04n7q2gd5'
             aria-pressed='false'
             onClick={getId}
           >
@@ -106,8 +105,7 @@ export default function Profile(props: ProfileProps) {
           </button>
 
           <button
-            id='entertainment'
-            data-id={"clfzce5jj000108l07be74phs"}
+            id='clfzce5jj000108l07be74phs'
             aria-pressed='false'
             onClick={getId}
           >
@@ -115,8 +113,7 @@ export default function Profile(props: ProfileProps) {
           </button>
 
           <button
-            id='general'
-            data-id={"clfzcenb9000208l0e3h0gazf"}
+            id='clfzcenb9000208l0e3h0gazf'
             aria-pressed='false'
             onClick={getId}
           >
@@ -124,8 +121,7 @@ export default function Profile(props: ProfileProps) {
           </button>
 
           <button
-            id='health'
-            data-id={"clfzcf4hf000308l0539n3w2w"}
+            id='clfzcf4hf000308l0539n3w2w'
             aria-pressed='false'
             onClick={getId}
           >
@@ -133,8 +129,7 @@ export default function Profile(props: ProfileProps) {
           </button>
 
           <button
-            id='science'
-            data-id={"clfzcflgw000408l04sx5g6ar"}
+            id='clfzcflgw000408l04sx5g6ar'
             aria-pressed='false'
             onClick={getId}
           >
@@ -142,8 +137,7 @@ export default function Profile(props: ProfileProps) {
           </button>
 
           <button
-            id='sports'
-            data-id={"clfzcfxvs000508l0cxhl4jwk"}
+            id='clfzcfxvs000508l0cxhl4jwk'
             aria-pressed='false'
             onClick={getId}
           >
@@ -151,8 +145,7 @@ export default function Profile(props: ProfileProps) {
           </button>
 
           <button
-            id='technology'
-            data-id={"clfzcgesv000608l04n7q2gd5"}
+            id='clfzcgesv000608l04n7q2gd5'
             aria-pressed='false'
             onClick={getId}
           >
