@@ -1,0 +1,30 @@
+.UpdateBanner {
+  height: 0;
+  background-color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 100vw;
+  position: absolute;
+  top: 60px;
+  overflow-y: hidden;
+
+  transition: height 0.5s;
+  transition-delay: 1s;
+}
+
+.UpdateBannerVisible {
+  height: 30px;
+  background-color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  width: 100vw;
+  position: absolute;
+  overflow-y: hidden;
+  top: 60px;
+
+  transition: height 0.5s;
+}

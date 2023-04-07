@@ -11,21 +11,19 @@ import prisma from "@/prisma/prisma";
 import Layout from "@/components/Layout";
 import Loading from "@/components/Loading";
 
+import refreshData from "@/lib/utils/refreshData";
+import rerouteNoAuth from "@/lib/utils/rerouteNoAuth";
+
 import styles from "@/styles/pages/profile.module.css";
+import UpdateBanner from "@/components/items/UpdateBanner";
 
 export async function getServerSideProps({
   req,
   res
 }: GetServerSidePropsContext) {
   const session = await getSession({ req });
+  if (!session) return rerouteNoAuth(res);
 
-  if (!session) {
-    res.writeHead(302, {
-      Location: "/"
-    });
-    res.end();
-    return { props: {} };
-  }
   const user = await prisma.user.findUnique({
     include: { topics: true },
     where: {
@@ -47,30 +45,67 @@ export async function getServerSideProps({
 }
 
 export default function Profile({ image, email, name, topics }: ProfileProps) {
-  // const { data: session } = useSession();
-  const [topicCount, setTopicCount] = useState(topics.length);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [updateMessage, setUpdateMessage] = useState("");
+
+  let currentTopics = topics.map((item) => item.id);
 
   const getId: MouseEventHandler<HTMLButtonElement> = (event) => {
     const btn = event.currentTarget;
     const active = btn.ariaPressed;
 
-    if (btn.ariaPressed === "false") {
-      if (topicCount > 2) return;
+    if (active === "false") {
+      if (currentTopics.length > 2) return;
 
-      setTopicCount(topicCount + 1);
+      currentTopics.push(btn.id);
       btn.ariaPressed = "true";
     } else {
-      setTopicCount(topicCount - 1);
+      currentTopics = currentTopics.filter((id) => btn.id !== id);
       btn.ariaPressed = "false";
     }
   };
+
+  async function saveTopics() {
+    setUpdateMessage("Updating preferences...");
+    setIsUpdating(true);
+
+    const newTopics = currentTopics.map((item) => {
+      return { id: item };
+    });
+
+    const response = await fetch(`/api/updateTopics`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newTopics)
+    });
+
+    if (!response.ok) {
+      const err = await response.json();
+      setUpdateMessage(err.message);
+      setIsUpdating(false);
+      throw new Error(err.message);
+    }
+
+    setUpdateMessage("Topics updated");
+    setIsUpdating(false);
+
+    const updatedUser = await response.json();
+    return updatedUser;
+  }
 
   const src =
     image ||
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
+  // useEffect(() => {
+  //   setIsUpdating(false);
+  // }, [topics]);
+
   return (
     <Layout>
+      <UpdateBanner msg={updateMessage} hidden={!isUpdating} />
       <div className={styles.header}>
         <div>
           <Image
@@ -81,6 +116,7 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
             loader={() => src}
             unoptimized
             className={styles.profileImg}
+            referrerPolicy='no-referrer'
           />
         </div>
         <div>
@@ -97,8 +133,8 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
         <div className={styles.topics}>
           <button
-            id='clfzcgesv000608l04n7q2gd5'
-            aria-pressed='false'
+            id='clfzcdg3c000008l00pymefki'
+            aria-pressed={currentTopics.includes("clfzcdg3c000008l00pymefki")}
             onClick={getId}
           >
             #Business
@@ -106,7 +142,7 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
           <button
             id='clfzce5jj000108l07be74phs'
-            aria-pressed='false'
+            aria-pressed={currentTopics.includes("clfzce5jj000108l07be74phs")}
             onClick={getId}
           >
             #Entertainment
@@ -114,7 +150,7 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
           <button
             id='clfzcenb9000208l0e3h0gazf'
-            aria-pressed='false'
+            aria-pressed={currentTopics.includes("clfzcenb9000208l0e3h0gazf")}
             onClick={getId}
           >
             #General
@@ -122,7 +158,7 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
           <button
             id='clfzcf4hf000308l0539n3w2w'
-            aria-pressed='false'
+            aria-pressed={currentTopics.includes("clfzcf4hf000308l0539n3w2w")}
             onClick={getId}
           >
             #Health
@@ -130,7 +166,7 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
           <button
             id='clfzcflgw000408l04sx5g6ar'
-            aria-pressed='false'
+            aria-pressed={currentTopics.includes("clfzcflgw000408l04sx5g6ar")}
             onClick={getId}
           >
             #Science
@@ -138,7 +174,7 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
           <button
             id='clfzcfxvs000508l0cxhl4jwk'
-            aria-pressed='false'
+            aria-pressed={currentTopics.includes("clfzcfxvs000508l0cxhl4jwk")}
             onClick={getId}
           >
             #Sports
@@ -146,14 +182,16 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
           <button
             id='clfzcgesv000608l04n7q2gd5'
-            aria-pressed='false'
+            aria-pressed={currentTopics.includes("clfzcgesv000608l04n7q2gd5")}
             onClick={getId}
           >
             #Technology
           </button>
         </div>
 
-        <button className={styles.saveBtn}>Save Topics</button>
+        <button onClick={saveTopics} className={styles.saveBtn}>
+          Save Topics
+        </button>
       </div>
     </Layout>
   );
