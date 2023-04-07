@@ -6,42 +6,38 @@ import { Post } from "@/lib/types";
 
 import styles from "@/styles/pages/Posts.module.css";
 
-const noImage =
-  "https://1000logos.net/wp-content/uploads/2017/05/Reddit-Logo-2005.png";
-
-const nsfw =
-  "https://www.online-tech-tips.com/wp-content/uploads/2020/09/NSFW.jpg";
-
 export default function Posts() {
   const [data, setData] = useState<Post[] | null>(null);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataError, setDataError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(`https://www.reddit.com/r/popular.json?limit=20`)
-      .then((res) => res.json())
-      .then((data) => {
-        const formattedData = data.data.children.map((post: any) => {
-          return {
-            title: post.data.title,
-            subreddit: post.data.subreddit_name_prefixed,
-            author: `u/${post.data.author}`,
-            thumbnail:
-              post.data.thumbnail === "self" ||
-              post.data.thumbnail === "default"
-                ? noImage
-                : post.data.thumbnail === "nsfw"
-                ? nsfw
-                : post.data.thumbnail,
-            url: post.data.url
-          };
-        });
-        setData(formattedData);
-        setLoading(false);
+    setIsLoading(true);
+    async function fetchPosts() {
+      const response = await fetch("/api/getPosts", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
       });
+
+      if (!response.ok) {
+        const err = await response.json();
+        setDataError(err.error);
+        setIsLoading(false);
+        return;
+      }
+
+      const data = await response.json();
+      setData(data);
+      setIsLoading(false);
+    }
+
+    fetchPosts();
   }, []);
 
   if (isLoading) return <Loading />;
+  if (dataError && !data) return <p>{dataError}</p>;
   if (!data) return <p>No posts found</p>;
 
   return (

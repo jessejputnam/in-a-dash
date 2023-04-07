@@ -1,5 +1,4 @@
-import { useSession, getSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { getSession } from "next-auth/react";
 import { MouseEventHandler, useEffect, useState } from "react";
 import { GetServerSidePropsContext } from "next";
 import Image from "next/image";
@@ -9,9 +8,7 @@ import { ProfileProps } from "@/lib/types";
 import prisma from "@/prisma/prisma";
 
 import Layout from "@/components/Layout";
-import Loading from "@/components/Loading";
 
-import refreshData from "@/lib/utils/refreshData";
 import rerouteNoAuth from "@/lib/utils/rerouteNoAuth";
 
 import styles from "@/styles/pages/profile.module.css";
@@ -98,10 +95,6 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
   const src =
     image ||
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
-
-  // useEffect(() => {
-  //   setIsUpdating(false);
-  // }, [topics]);
 
   return (
     <Layout>
