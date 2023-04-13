@@ -43,5 +43,25 @@ export interface Post {
 
 export interface Topic {
   id: string;
-  keyword: string;
+  keyword: TopicString;
+}
+
+export type TopicString =
+  | "business"
+  | "entertainment"
+  | "general"
+  | "health"
+  | "science"
+  | "sports"
+  | "technology";
+
+//
+export interface PostData {
+  data: {
+    title: string;
+    subreddit_name_prefixed: string;
+    author: string;
+    thumbnail: string;
+    url: string;
+  };
 }
