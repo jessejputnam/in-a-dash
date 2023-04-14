@@ -6,29 +6,43 @@ import { Article } from "@/lib/types";
 
 import styles from "@/styles/pages/Articles.module.css";
 
-const news_api = process.env.NEXT_PUBLIC_NEWS_API;
-
 export default function Articles() {
   const [data, setData] = useState<Article[] | null>(null);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataError, setDataError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${news_api}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data.articles);
-        setLoading(false);
+    setIsLoading(true);
+    async function fetchArticles() {
+      const response = await fetch("/api/getArticles", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json"
+        }
       });
+
+      if (!response.ok) {
+        const err = await response.json();
+        setDataError(err.error);
+        setIsLoading(false);
+      }
+
+      const data = await response.json();
+      setData(data);
+      setIsLoading(false);
+    }
+
+    fetchArticles();
   }, []);
 
   if (isLoading) return <Loading />;
+  if (dataError && !data) return <p>{dataError}</p>;
   if (!data) return <p>No articles found</p>;
 
   return (
     <div className={styles.results}>
       {data.map((article) => (
-        <div key={article.title}>
+        <div key={article.title + Math.random()}>
           <ArticlePreview {...article} />
         </div>
       ))}

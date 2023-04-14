@@ -3,8 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./auth/[...nextauth]";
 
 import prisma from "@/prisma/prisma";
-import fetchPosts from "@/lib/utils/fetchPosts";
 import { TopicString } from "@/lib/types";
+import fetchArticles from "@/lib/utils/fetchArticles";
 
 export default async function handle(
   req: NextApiRequest,
@@ -17,7 +17,7 @@ export default async function handle(
 
     // If no session present
     if (!session) {
-      const fetchedData = await fetchPosts(null, 24);
+      const fetchedData = await fetchArticles(null, 24);
       return res.status(200).json(fetchedData);
     }
 
@@ -31,7 +31,7 @@ export default async function handle(
 
     // If no user || User has not selected topic preferences
     if (!user || !user.topics.length) {
-      const fetchedData = await fetchPosts(null, 24);
+      const fetchedData = await fetchArticles(null, 24);
       return res.status(200).json(fetchedData);
     }
 
@@ -40,15 +40,15 @@ export default async function handle(
 
     if (topics.length === 1) {
       const topic = topics[0].keyword as TopicString;
-      const fetchedData = await fetchPosts(topic, 24);
+      const fetchedData = await fetchArticles(topic, 24);
       return res.status(200).json(fetchedData);
     }
 
     if (topics.length === 2) {
       const topicA = topics[0].keyword as TopicString;
       const topicB = topics[1].keyword as TopicString;
-      const fetchedDataAPromise = fetchPosts(topicA, 12);
-      const fetchedDataBPromise = fetchPosts(topicB, 12);
+      const fetchedDataAPromise = fetchArticles(topicA, 12);
+      const fetchedDataBPromise = fetchArticles(topicB, 12);
 
       const allData = await Promise.all([
         fetchedDataAPromise,
@@ -64,9 +64,9 @@ export default async function handle(
       const topicA = topics[0].keyword as TopicString;
       const topicB = topics[1].keyword as TopicString;
       const topicC = topics[2].keyword as TopicString;
-      const fetchedDataAPromise = fetchPosts(topicA, 8);
-      const fetchedDataBPromise = fetchPosts(topicB, 8);
-      const fetchedDataCPromise = fetchPosts(topicC, 8);
+      const fetchedDataAPromise = fetchArticles(topicA, 8);
+      const fetchedDataBPromise = fetchArticles(topicB, 8);
+      const fetchedDataCPromise = fetchArticles(topicC, 8);
 
       const allData = await Promise.all([
         fetchedDataAPromise,
@@ -79,6 +79,6 @@ export default async function handle(
       return res.status(200).json(fetchedData);
     }
   } catch (err) {
-    res.status(500).json({ error: "Could not load posts" });
+    res.status(500).json({ error: "Could not load articles" });
   }
 }

@@ -18,7 +18,7 @@ export default function formatPost(post: PostData) {
         ? noImage
         : post.data.thumbnail === "nsfw"
         ? nsfw
-        : post.data.thumbnail,
+        : post.data.preview.images[0].source.url.replaceAll("&amp;", "&"),
     url: post.data.url
   };
 }

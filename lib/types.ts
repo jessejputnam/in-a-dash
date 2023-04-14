@@ -62,6 +62,9 @@ export interface PostData {
     subreddit_name_prefixed: string;
     author: string;
     thumbnail: string;
+    preview: {
+      images: [{ source: { url: string } }];
+    };
     url: string;
   };
 }
