@@ -29,7 +29,6 @@ export default function Posts() {
       }
 
       const data = await response.json();
-      console.log(data);
       setData(data);
       setIsLoading(false);
     }

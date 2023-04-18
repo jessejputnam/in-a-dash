@@ -68,3 +68,13 @@ export interface PostData {
     url: string;
   };
 }
+
+export interface VideoData {
+  snippet: {
+    title: string;
+    channelTitle: string;
+    description: string;
+    thumbnails: { standard: { url: string } };
+  };
+  id: string;
+}

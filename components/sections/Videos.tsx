@@ -10,33 +10,36 @@ const youtube_api = process.env.NEXT_PUBLIC_YOUTUBE_API;
 
 export default function Videos() {
   const [data, setData] = useState<Video[] | null>(null);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataError, setDataError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=20&regionCode=US&key=${youtube_api}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const formattedData = data.items.map((item: any) => {
-          return {
-            title: item.snippet.title,
-            channel: item.snippet.channelTitle,
-            description: item.snippet.description.slice(0, 200),
-            thumbnail: item.snippet.thumbnails.standard.url,
-            viewCount: item.statistics.viewCount,
-            url: `https://www.youtube.com/watch?v=${item.id}`
-          };
-        });
-        console.log(formattedData);
-
-        setData(formattedData);
-        setLoading(false);
+    setIsLoading(true);
+    async function fetchVideos() {
+      const response = await fetch("/api/getVideos", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json"
+        }
       });
+
+      if (!response.ok) {
+        const err = await response.json();
+        setDataError(err.error);
+        setIsLoading(false);
+        return;
+      }
+
+      const data = await response.json();
+      setData(data);
+      setIsLoading(false);
+    }
+
+    fetchVideos();
   }, []);
 
   if (isLoading) return <Loading />;
+  if (dataError && !data) return <p>{dataError}</p>;
   if (!data) return <p>No videos found</p>;
 
   return (
