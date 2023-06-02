@@ -11,6 +11,8 @@
 }
 
 .img {
+  min-height: 150px;
+  min-width: 275px;
   border-radius: 10px;
   box-shadow: 0 0 3px 0 var(--dark-box-shadow);
 }

@@ -1,37 +1,40 @@
 import { useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 import Logo from "@/components/items/Logo";
-import { Menu } from "../items/Menu";
+import Menu from "../items/Menu";
+import Burger from "../items/Burger";
 
 import styles from "@/styles/sections/Header.module.css";
+import Nav from "../items/Nav";
+import BurgerNav from "../items/BurgerNav";
 
 export default function Header() {
   const { data: session, status } = useSession();
   const [menu, setMenu] = useState(false);
+  const [nav, setNav] = useState(false);
 
   const loading = status === "loading";
 
-  const handleSelect = () => setMenu(false);
+  const toggleMenu = () => {
+    if (nav) setNav(!nav);
+    setMenu(!menu);
+  };
+
+  const toggleNav = () => {
+    if (menu) setMenu(!menu);
+    setNav(!nav);
+  };
 
   return (
     <header className={styles.Header}>
       <div className={!session && loading ? styles.loading : styles.loaded}>
         <Logo />
-        <div className={styles.links}>
-          <Link className={styles.link} href='/articles'>
-            Articles
-          </Link>
-          <Link className={styles.link} href='/videos'>
-            Videos
-          </Link>
-          <Link className={styles.link} href='/posts'>
-            Posts
-          </Link>
-        </div>
+        <Nav />
+        <Burger toggle={toggleNav} open={nav} />
 
         {!session ? (
           <div>
@@ -42,7 +45,7 @@ export default function Header() {
         ) : (
           <div
             className={`${styles.profileBackground} ${menu ? styles.open : ""}`}
-            onClick={() => setMenu(!menu)}
+            onClick={toggleMenu}
           >
             <FontAwesomeIcon
               className={`${styles.profile} ${menu ? styles.open : ""}`}
@@ -51,7 +54,8 @@ export default function Header() {
           </div>
         )}
       </div>
-      {menu ? <Menu select={handleSelect} /> : null}
+      {menu ? <Menu select={toggleMenu} /> : null}
+      {nav ? <BurgerNav select={toggleNav} /> : null}
     </header>
   );
 }

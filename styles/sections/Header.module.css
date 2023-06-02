@@ -25,24 +25,6 @@
   transform: rotateX(180deg);
 }
 
-.links {
-  position: absolute;
-  left: 80px;
-  display: flex;
-  gap: 25px;
-}
-
-.link {
-  font-size: 1.5rem;
-}
-
-@media (hover: hover) {
-  .link:hover {
-    text-decoration: underline;
-    text-underline-offset: 20px;
-  }
-}
-
 .profileBackground {
   border-radius: 50%;
   background: var(--secondary-glow);

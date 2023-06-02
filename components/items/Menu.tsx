@@ -3,38 +3,23 @@ import { signOut } from "next-auth/react";
 
 import styles from "@/styles/items/Menu.module.css";
 
-export function Menu({ select }: any) {
+function Menu({ select }: { select: () => void }) {
   return (
     <ul className={styles.Menu}>
       <li>
-        <Link
-          onClick={() => select()}
-          className={styles.hover}
-          href='/profile'
-          style={{ fontSize: "1.3rem" }}
-        >
+        <Link onClick={() => select()} className={styles.hover} href='/profile'>
           Profile
         </Link>
       </li>
       <hr />
       <li>
-        <Link
-          onClick={() => select()}
-          className={styles.hover}
-          href='/boards'
-          style={{ fontSize: "1.3rem" }}
-        >
+        <Link onClick={() => select()} className={styles.hover} href='/boards'>
           Boards
         </Link>
       </li>
       <hr />
       <li>
-        <Link
-          onClick={() => select()}
-          className={styles.hover}
-          href='#'
-          style={{ fontSize: "1.3rem" }}
-        >
+        <Link onClick={() => select()} className={styles.hover} href='#'>
           Dark Mode
         </Link>
       </li>
@@ -46,7 +31,6 @@ export function Menu({ select }: any) {
             signOut();
             select();
           }}
-          style={{ fontSize: "1.3rem" }}
         >
           Log Out
         </p>
@@ -54,3 +38,5 @@ export function Menu({ select }: any) {
     </ul>
   );
 }
+
+export default Menu;
