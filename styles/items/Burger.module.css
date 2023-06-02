@@ -14,7 +14,7 @@
   position: absolute;
   transition: top 0.3s, opacity 0s;
   transition-delay: var(--delay), var(--delay);
-  transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out, linear;
 }
 
 /* Menu Closed */
