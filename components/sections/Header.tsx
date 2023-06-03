@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-import { Status } from "@/lib/types";
+import { Status, Theme } from "@/lib/types";
 import { Session } from "next-auth/core/types";
 
 import Logo from "@/components/items/Logo";
@@ -16,10 +16,12 @@ import BurgerNav from "../items/BurgerNav";
 
 export default function Header({
   session,
-  status
+  status,
+  theme
 }: {
   session: Session | null;
   status: Status;
+  theme: Theme;
 }) {
   const [menu, setMenu] = useState(false);
   const [nav, setNav] = useState(false);
@@ -37,7 +39,9 @@ export default function Header({
   };
 
   return (
-    <header className={styles.Header}>
+    <header
+      className={`${styles.Header} ${theme === "light" ? "" : styles.dark}`}
+    >
       <div className={!session && loading ? styles.loading : styles.loaded}>
         <Logo />
         <Nav />

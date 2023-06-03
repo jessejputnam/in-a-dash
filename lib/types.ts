@@ -3,6 +3,13 @@ export type LogoProps = "loader" | null;
 
 export type Status = "authenticated" | "loading" | "unauthenticated";
 
+export type Theme = "light" | "dark";
+
+export type ThemeContextType = {
+  theme: Theme;
+  toggleTheme: () => void;
+};
+
 export interface ProfileProps {
   id: string;
   name: string;
