@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
 /* VARIABLES */
 
 :root {
@@ -20,8 +22,6 @@
   --screen-break: 600px;
   --max-width: 1100px;
   --border-radius: 12px;
-
-  font-size: 16px;
 
   --loading: linear-gradient(
     to right,
@@ -57,6 +57,10 @@
 
 /* GENERAL FORMATTING */
 
+:root {
+  font-size: 16px;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -79,6 +83,21 @@ main {
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
+}
+
+/* Headers */
+h1 {
+  font-family: "Righteous", Impact, Haettenschweiler, "Arial Narrow Bold",
+    sans-serif;
+  font-size: 4rem;
+  transform: skewX(-30deg);
+  border-bottom: solid 5px var(--red);
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 2.8rem;
+  }
 }
 
 /* LINKS/BUTTONS */

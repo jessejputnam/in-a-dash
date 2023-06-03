@@ -10,13 +10,17 @@ function BurgerNav({ select }: { select: () => void }) {
           Articles
         </Link>
       </li>
+
       <hr />
+
       <li onClick={() => select()}>
         <Link className={styles.link} href='/videos'>
           Videos
         </Link>
       </li>
+
       <hr />
+
       <li onClick={() => select()}>
         <Link className={styles.link} href='/posts'>
           Posts

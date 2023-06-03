@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 
 import Logo from "@/components/items/Logo";
 import Menu from "../items/Menu";

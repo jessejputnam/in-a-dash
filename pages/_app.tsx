@@ -42,7 +42,6 @@ export default function App({
         <meta name='apple-mobile-web-app-title' content='In A Dash' />
         <meta name='application-name' content='In A Dash' />
         <meta name='msapplication-TileColor' content='#da532c' />
-        <meta name='theme-color' content='#ffffff' />
       </Head>
 
       <Component {...pageProps} />

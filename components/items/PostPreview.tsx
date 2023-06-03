@@ -12,13 +12,13 @@ export default function PostPreview(post: Post) {
     <div className={styles.PostPreview}>
       <a className={styles.imgLink} href={post.url} target='_blank'>
         <Image
-          className={"styles.img"}
+          className={styles.img}
           loader={() => src}
           unoptimized
           src={src}
           alt='Post thumbnail'
-          width={275}
-          height={150}
+          style={{ objectFit: "cover" }}
+          fill
         />
       </a>
       <div className={styles.info}>
