@@ -14,7 +14,7 @@ function Menu({ select }: { select: () => void }) {
       <hr />
       <li>
         <Link onClick={() => select()} className={styles.hover} href='/boards'>
-          Boards
+          My Boards
         </Link>
       </li>
       <hr />

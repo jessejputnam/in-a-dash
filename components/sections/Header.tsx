@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+
+import { Status } from "@/lib/types";
+import { Session } from "next-auth/core/types";
 
 import Logo from "@/components/items/Logo";
 import Menu from "../items/Menu";
@@ -11,8 +14,13 @@ import styles from "@/styles/sections/Header.module.css";
 import Nav from "../items/Nav";
 import BurgerNav from "../items/BurgerNav";
 
-export default function Header() {
-  const { data: session, status } = useSession();
+export default function Header({
+  session,
+  status
+}: {
+  session: Session | null;
+  status: Status;
+}) {
   const [menu, setMenu] = useState(false);
   const [nav, setNav] = useState(false);
 

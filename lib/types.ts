@@ -1,6 +1,8 @@
 // PROPS
 export type LogoProps = "loader" | null;
 
+export type Status = "authenticated" | "loading" | "unauthenticated";
+
 export interface ProfileProps {
   id: string;
   name: string;

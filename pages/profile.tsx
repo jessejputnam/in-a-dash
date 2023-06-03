@@ -113,7 +113,7 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
           />
         </div>
         <div>
-          <h1>{name}</h1>
+          <h2>{name}</h2>
           <p>{email}</p>
         </div>
       </div>
