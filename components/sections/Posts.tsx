@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 
 import Loading from "../Loading";
 import ContentCard from "../items/ContentCard";
 import { Card } from "@/lib/types";
 
-import styles from "@/styles/pages/Posts.module.css";
+const Results = styled.div`
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+`;
 
 export default function Posts() {
   const [data, setData] = useState<Card[] | null>(null);
@@ -41,12 +48,12 @@ export default function Posts() {
   if (!data) return <p>No posts found</p>;
 
   return (
-    <div className={styles.results}>
+    <Results>
       {data.map((post) => (
         <div key={post.title + Math.random()}>
           <ContentCard {...post} />
         </div>
       ))}
-    </div>
+    </Results>
   );
 }

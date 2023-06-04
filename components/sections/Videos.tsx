@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 
 import ContentCard from "../items/ContentCard";
 import Loading from "../Loading";
 
 import { Card } from "@/lib/types";
 
-import styles from "@/styles/pages/Videos.module.css";
+const Results = styled.div`
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+`;
 
 export default function Videos() {
   const [data, setData] = useState<Card[] | null>(null);
@@ -42,12 +49,12 @@ export default function Videos() {
   if (!data) return <p>No videos found</p>;
 
   return (
-    <div className={styles.results}>
+    <Results>
       {data.map((video) => (
         <div key={video.title}>
           <ContentCard {...video} />
         </div>
       ))}
-    </div>
+    </Results>
   );
 }

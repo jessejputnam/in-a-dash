@@ -10,11 +10,3 @@
   flex-direction: column;
   gap: 15px;
 }
-
-.results {
-  margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-around;
-}
