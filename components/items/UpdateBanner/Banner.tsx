@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { UpdateBannerProps } from "@/lib/types";
 
 const Banner = styled.div<{ $hidden: boolean }>`
   height: ${(props) => (props.$hidden ? "0" : "30px")};
@@ -17,10 +16,4 @@ const Banner = styled.div<{ $hidden: boolean }>`
   transition-delay: ${(props) => (props.$hidden ? "1s" : "0s")};
 `;
 
-export default function UpdateBanner({ msg, hidden }: UpdateBannerProps) {
-  return (
-    <Banner $hidden={hidden} onClick={() => console.log("Hidden: " + hidden)}>
-      <p>{msg}</p>
-    </Banner>
-  );
-}
+export default Banner;

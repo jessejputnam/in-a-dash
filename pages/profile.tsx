@@ -13,7 +13,7 @@ import Layout from "@/components/Layout";
 import rerouteNoAuth from "@/lib/utils/rerouteNoAuth";
 
 import styles from "@/styles/pages/profile.module.css";
-import UpdateBanner from "@/components/items/UpdateBanner";
+import UpdateBanner from "@/components/items/UpdateBanner/UpdateBanner";
 
 export async function getServerSideProps({
   req,

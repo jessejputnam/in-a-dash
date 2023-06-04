@@ -6,11 +6,11 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Status, Theme } from "@/lib/types";
 import { Session } from "next-auth/core/types";
 
-import Logo from "@/components/items/Logo";
-import Menu from "../items/Menu";
+import Logo from "@/components/items/Logo/Logo";
+import Menu from "../items/Menu/Menu";
 import Burger from "../items/Burger/Burger";
 
-import Nav from "../items/Nav";
+import Nav from "../items/Nav/Nav";
 import BurgerNav from "../items/BurgerNav/BurgerNav";
 import styled from "styled-components";
 
