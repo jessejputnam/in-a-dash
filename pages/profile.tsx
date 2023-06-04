@@ -1,7 +1,8 @@
 import { getSession } from "next-auth/react";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { GetServerSidePropsContext } from "next";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { ProfileProps } from "@/lib/types";
 
@@ -44,6 +45,8 @@ export async function getServerSideProps({
 export default function Profile({ image, email, name, topics }: ProfileProps) {
   const [isUpdating, setIsUpdating] = useState(false);
   const [updateMessage, setUpdateMessage] = useState("");
+  const router = useRouter();
+  const refreshData = () => router.replace(router.asPath);
 
   let currentTopics = topics.map((item) => item.id);
 
@@ -89,6 +92,7 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
     setIsUpdating(false);
 
     const updatedUser = await response.json();
+    refreshData();
     return updatedUser;
   }
 

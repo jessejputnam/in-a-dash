@@ -1,0 +1,23 @@
+/* .Nav {
+  position: absolute;
+  left: 80px;
+  display: flex;
+  gap: 25px;
+} */
+
+.link {
+  font-size: 1.5rem;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    text-decoration: underline;
+    text-underline-offset: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .Nav {
+    display: none;
+  }
+}

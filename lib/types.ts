@@ -41,6 +41,11 @@ export interface Card {
   src: string;
 }
 
+export interface UpdateBannerProps {
+  msg: string;
+  hidden: boolean;
+}
+
 export interface Topic {
   id: string;
   keyword: TopicString;
