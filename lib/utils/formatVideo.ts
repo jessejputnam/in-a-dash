@@ -1,9 +1,9 @@
-import { Card, VideoData } from "../types";
+import { CardType, VideoData } from "../types";
 
 const img404 =
   "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png";
 
-export default function formatVideo(video: VideoData): Card {
+export default function formatVideo(video: VideoData): CardType {
   return {
     type: "video",
     title: video.snippet.title,

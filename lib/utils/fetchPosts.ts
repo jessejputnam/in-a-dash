@@ -1,4 +1,4 @@
-import { Card, PostData, TopicString } from "../types";
+import { CardType, PostData, TopicString } from "../types";
 import formatPost from "./formatPost";
 
 const subreddit = {
@@ -24,7 +24,9 @@ export default async function fetchPosts(
   const data = await response.json();
   const posts = data.data.children;
 
-  const formattedData: Card[] = posts.map((post: PostData) => formatPost(post));
+  const formattedData: CardType[] = posts.map((post: PostData) =>
+    formatPost(post)
+  );
 
   return formattedData;
 }

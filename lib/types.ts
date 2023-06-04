@@ -33,7 +33,7 @@ export interface ArticleData {
   content: string | null;
 }
 
-export interface Card {
+export interface CardType {
   type: string;
   title: string;
   desc: string | null;

@@ -2,19 +2,19 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import Loading from "../Loading";
-import ContentCard from "../items/ContentCard";
-import { Card } from "@/lib/types";
+import ContentCard from "../items/ContentCard/ContentCard";
+import { CardType } from "@/lib/types";
 
 const Results = styled.div`
-margin-top: 50px;
-display: flex;
-flex-wrap: wrap;
-gap: 20px;
-justify-content: space-around;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
 `;
 
 export default function Articles() {
-  const [data, setData] = useState<Card[] | null>(null);
+  const [data, setData] = useState<CardType[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [dataError, setDataError] = useState<string | null>(null);
 

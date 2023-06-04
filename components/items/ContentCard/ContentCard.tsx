@@ -1,18 +1,8 @@
-import { Card } from "@/lib/types";
+import { CardType } from "@/lib/types";
 import Image from "next/image";
 import styled from "styled-components";
 
-const Card = styled.div`
-  box-shadow: 0 0 3px 0 var(--dark-box-shadow);
-  height: 450px;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  border-radius: 10px;
-  padding: 10px;
-`;
+import Card from "./Card";
 
 const ImgWrapper = styled.a`
   min-height: 150px;
@@ -36,7 +26,7 @@ const P = styled.p`
   overflow-wrap: break-word;
 `;
 
-function ContentCard(data: Card) {
+function ContentCard(data: CardType) {
   const { type, url, title, desc, src } = data;
 
   return (

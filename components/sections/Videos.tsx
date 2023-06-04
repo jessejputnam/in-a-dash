@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import ContentCard from "../items/ContentCard";
+import ContentCard from "../items/ContentCard/ContentCard";
 import Loading from "../Loading";
 
-import { Card } from "@/lib/types";
+import { CardType } from "@/lib/types";
 
 const Results = styled.div`
   margin-top: 50px;
@@ -15,7 +15,7 @@ const Results = styled.div`
 `;
 
 export default function Videos() {
-  const [data, setData] = useState<Card[] | null>(null);
+  const [data, setData] = useState<CardType[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [dataError, setDataError] = useState<string | null>(null);
 

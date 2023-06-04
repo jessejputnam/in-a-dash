@@ -1,4 +1,4 @@
-import { Card, PostData } from "../types";
+import { CardType, PostData } from "../types";
 
 const img404 =
   "https://1000logos.net/wp-content/uploads/2017/05/Reddit-Logo-2005.png";
@@ -6,7 +6,7 @@ const img404 =
 const nsfw =
   "https://www.online-tech-tips.com/wp-content/uploads/2020/09/NSFW.jpg";
 
-export default function formatPost(post: PostData): Card {
+export default function formatPost(post: PostData): CardType {
   return {
     type: "post",
     title: post.data.title,

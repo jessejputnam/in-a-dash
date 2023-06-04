@@ -1,4 +1,4 @@
-import { ArticleData, Card, TopicString } from "../types";
+import { ArticleData, CardType, TopicString } from "../types";
 import formatArticle from "./formatArticle";
 
 const news_api = process.env.NEXT_PUBLIC_NEWS_API;
@@ -15,7 +15,7 @@ export default async function fetchArticles(
   const data = await response.json();
   const articles = data.articles;
 
-  const formattedData: Card[] = articles.map((article: ArticleData) =>
+  const formattedData: CardType[] = articles.map((article: ArticleData) =>
     formatArticle(article)
   );
 
