@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 
 import Loading from "../Loading";
-// import ArticlePreview from "@/components/items/ArticlePreview";
 import ContentCard from "../items/ContentCard";
 import { Card } from "@/lib/types";
-
-import styles from "@/styles/pages/Articles.module.css";
 
 export default function Articles() {
   const [data, setData] = useState<Card[] | null>(null);
@@ -36,17 +34,25 @@ export default function Articles() {
     fetchArticles();
   }, []);
 
+  const Results = styled.div`
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+  `;
+
   if (isLoading) return <Loading />;
   if (dataError && !data) return <p>{dataError}</p>;
   if (!data) return <p>No articles found</p>;
 
   return (
-    <div className={styles.results}>
+    <Results>
       {data.map((article) => (
         <div key={article.title + Math.random()}>
           <ContentCard {...article} />
         </div>
       ))}
-    </div>
+    </Results>
   );
 }
