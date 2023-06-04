@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 
 import Loading from "../Loading";
-import ArticlePreview from "@/components/items/ArticlePreview";
-import { Article } from "@/lib/types";
+// import ArticlePreview from "@/components/items/ArticlePreview";
+import ContentCard from "../items/ContentCard";
+import { Card } from "@/lib/types";
 
 import styles from "@/styles/pages/Articles.module.css";
 
 export default function Articles() {
-  const [data, setData] = useState<Article[] | null>(null);
+  const [data, setData] = useState<Card[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [dataError, setDataError] = useState<string | null>(null);
 
@@ -43,7 +44,7 @@ export default function Articles() {
     <div className={styles.results}>
       {data.map((article) => (
         <div key={article.title + Math.random()}>
-          <ArticlePreview {...article} />
+          <ContentCard {...article} />
         </div>
       ))}
     </div>

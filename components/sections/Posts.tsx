@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
 import Loading from "../Loading";
-import PostPreview from "../items/PostPreview";
-import { Post } from "@/lib/types";
+import ContentCard from "../items/ContentCard";
+import { Card } from "@/lib/types";
 
 import styles from "@/styles/pages/Posts.module.css";
 
 export default function Posts() {
-  const [data, setData] = useState<Post[] | null>(null);
+  const [data, setData] = useState<Card[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [dataError, setDataError] = useState<string | null>(null);
 
@@ -44,7 +44,7 @@ export default function Posts() {
     <div className={styles.results}>
       {data.map((post) => (
         <div key={post.title + Math.random()}>
-          <PostPreview {...post} />
+          <ContentCard {...post} />
         </div>
       ))}
     </div>

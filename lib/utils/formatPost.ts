@@ -1,21 +1,21 @@
-import { PostData } from "../types";
+import { Card, PostData } from "../types";
 
-const noImage =
+const img404 =
   "https://1000logos.net/wp-content/uploads/2017/05/Reddit-Logo-2005.png";
 
 const nsfw =
   "https://www.online-tech-tips.com/wp-content/uploads/2020/09/NSFW.jpg";
 
-export default function formatPost(post: PostData) {
+export default function formatPost(post: PostData): Card {
   return {
+    type: "post",
     title: post.data.title,
-    subreddit: post.data.subreddit_name_prefixed,
-    author: `u/${post.data.author}`,
-    thumbnail:
+    desc: `u/${post.data.author}`,
+    src:
       post.data.thumbnail === "self" ||
       post.data.thumbnail === "default" ||
       post.data.thumbnail.includes("external-preview")
-        ? noImage
+        ? img404
         : post.data.thumbnail === "nsfw"
         ? nsfw
         : post.data.preview.images[0].source.url.replaceAll("&amp;", "&"),

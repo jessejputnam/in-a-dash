@@ -1,4 +1,4 @@
-import { TopicString, VideoData } from "../types";
+import { Card, TopicString, VideoData } from "../types";
 import formatVideo from "./formatVideo";
 
 const youtube_api = process.env.NEXT_PUBLIC_YOUTUBE_API;
@@ -25,7 +25,9 @@ export default async function fetchVideos(
   const data = await response.json();
   const videos = data.items;
 
-  const formattedData = videos.map((video: VideoData) => formatVideo(video));
+  const formattedData: Card[] = videos.map((video: VideoData) =>
+    formatVideo(video)
+  );
 
   return formattedData;
 }

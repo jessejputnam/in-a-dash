@@ -19,7 +19,7 @@ export interface ProfileProps {
 }
 
 // DATABASE OBJECTS
-export interface Article {
+export interface ArticleData {
   source: {
     id: string;
     name: string;
@@ -33,21 +33,12 @@ export interface Article {
   content: string | null;
 }
 
-export interface Video {
+export interface Card {
+  type: string;
   title: string;
-  channel: string;
-  description: string;
-  thumbnail: string;
-  viewCount: string;
+  desc: string | null;
   url: string;
-}
-
-export interface Post {
-  title: string;
-  subreddit: string;
-  author: string;
-  thumbnail: string;
-  url: string;
+  src: string;
 }
 
 export interface Topic {

@@ -1,15 +1,14 @@
-import { Video } from "@/lib/types";
 import { useState, useEffect } from "react";
 
-import VideoPreview from "../items/VideoPreview";
+import ContentCard from "../items/ContentCard";
 import Loading from "../Loading";
+
+import { Card } from "@/lib/types";
 
 import styles from "@/styles/pages/Videos.module.css";
 
-const youtube_api = process.env.NEXT_PUBLIC_YOUTUBE_API;
-
 export default function Videos() {
-  const [data, setData] = useState<Video[] | null>(null);
+  const [data, setData] = useState<Card[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [dataError, setDataError] = useState<string | null>(null);
 
@@ -45,8 +44,8 @@ export default function Videos() {
   return (
     <div className={styles.results}>
       {data.map((video) => (
-        <div key={video.title + video.viewCount}>
-          <VideoPreview {...video} />
+        <div key={video.title}>
+          <ContentCard {...video} />
         </div>
       ))}
     </div>
