@@ -1,28 +1,39 @@
 import Link from "next/link";
+import styled from "styled-components";
 
-import styles from "@/styles/items/Nav.module.css";
+const Menu = styled.ul`
+  position: absolute;
+  left: 80px;
+  display: flex;
+  gap: 25px;
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  font-size: 1.5rem;
+  :hover {
+    text-decoration: underline;
+    text-underline-offset: 20px;
+  }
+`;
 
 function Nav() {
   return (
-    <ul className={styles.Nav}>
+    <Menu>
       <li>
-        <Link className={styles.link} href='/articles'>
-          Articles
-        </Link>
+        <StyledLink href='/articles'>Articles</StyledLink>
       </li>
       <hr />
       <li>
-        <Link className={styles.link} href='/videos'>
-          Videos
-        </Link>
+        <StyledLink href='/videos'>Videos</StyledLink>
       </li>
       <hr />
       <li>
-        <Link className={styles.link} href='/posts'>
-          Posts
-        </Link>
+        <StyledLink href='/posts'>Posts</StyledLink>
       </li>
-    </ul>
+    </Menu>
   );
 }
 
