@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import Layout from "@/components/Layout";
 import NoAuthHome from "@/components/home/NoAuthHome";
 import AuthHome from "@/components/home/AuthHome";
-import Loading from "@/components/Loading";
+import Loading from "@/components/items/Loading/Loading";
 
 export default function Home() {
   const { data: session, status } = useSession();

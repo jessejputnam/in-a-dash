@@ -1,24 +1,17 @@
 import { getSession } from "next-auth/react";
-import { MouseEventHandler, useState } from "react";
-import { GetServerSidePropsContext } from "next";
+import { MouseEventHandler as MEH, useState } from "react";
+import { GetServerSidePropsContext as GSP } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-
 import { ProfileProps } from "@/lib/types";
-
 import prisma from "@/prisma/prisma";
-
 import Layout from "@/components/Layout";
-
 import rerouteNoAuth from "@/lib/utils/rerouteNoAuth";
 
 import styles from "@/styles/pages/profile.module.css";
 import UpdateBanner from "@/components/items/UpdateBanner/UpdateBanner";
 
-export async function getServerSideProps({
-  req,
-  res
-}: GetServerSidePropsContext) {
+export async function getServerSideProps({ req, res }: GSP) {
   const session = await getSession({ req });
   if (!session) return rerouteNoAuth(res);
 
@@ -50,19 +43,15 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
   let currentTopics = topics.map((item) => item.id);
 
-  const getId: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const getId: MEH = (event) => {
     const btn = event.currentTarget;
-    const active = btn.ariaPressed;
+    const active = btn.ariaPressed == "true" ? true : false;
+    if (!active && currentTopics.length > 2) return;
 
-    if (active === "false") {
-      if (currentTopics.length > 2) return;
+    if (!active) currentTopics.push(btn.id);
+    else currentTopics = currentTopics.filter((id) => btn.id !== id);
 
-      currentTopics.push(btn.id);
-      btn.ariaPressed = "true";
-    } else {
-      currentTopics = currentTopics.filter((id) => btn.id !== id);
-      btn.ariaPressed = "false";
-    }
+    btn.ariaPressed = active ? "false" : "true";
   };
 
   async function saveTopics() {
@@ -100,6 +89,16 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
     image ||
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
+  const ids = [
+    "clfzcdg3c000008l00pymefki",
+    "clfzce5jj000108l07be74phs",
+    "clfzcenb9000208l0e3h0gazf",
+    "clfzcf4hf000308l0539n3w2w",
+    "clfzcflgw000408l04sx5g6ar",
+    "clfzcfxvs000508l0cxhl4jwk",
+    "clfzcgesv000608l04n7q2gd5"
+  ];
+
   return (
     <Layout>
       <UpdateBanner msg={updateMessage} hidden={!isUpdating} />
@@ -130,56 +129,56 @@ export default function Profile({ image, email, name, topics }: ProfileProps) {
 
         <div className={styles.topics}>
           <button
-            id='clfzcdg3c000008l00pymefki'
-            aria-pressed={currentTopics.includes("clfzcdg3c000008l00pymefki")}
+            id={ids[0]}
+            aria-pressed={currentTopics.includes(ids[0])}
             onClick={getId}
           >
             #Business
           </button>
 
           <button
-            id='clfzce5jj000108l07be74phs'
-            aria-pressed={currentTopics.includes("clfzce5jj000108l07be74phs")}
+            id={ids[1]}
+            aria-pressed={currentTopics.includes(ids[1])}
             onClick={getId}
           >
             #Entertainment
           </button>
 
           <button
-            id='clfzcenb9000208l0e3h0gazf'
-            aria-pressed={currentTopics.includes("clfzcenb9000208l0e3h0gazf")}
+            id={ids[2]}
+            aria-pressed={currentTopics.includes(ids[2])}
             onClick={getId}
           >
             #General
           </button>
 
           <button
-            id='clfzcf4hf000308l0539n3w2w'
-            aria-pressed={currentTopics.includes("clfzcf4hf000308l0539n3w2w")}
+            id={ids[3]}
+            aria-pressed={currentTopics.includes(ids[3])}
             onClick={getId}
           >
             #Health
           </button>
 
           <button
-            id='clfzcflgw000408l04sx5g6ar'
-            aria-pressed={currentTopics.includes("clfzcflgw000408l04sx5g6ar")}
+            id={ids[4]}
+            aria-pressed={currentTopics.includes(ids[4])}
             onClick={getId}
           >
             #Science
           </button>
 
           <button
-            id='clfzcfxvs000508l0cxhl4jwk'
-            aria-pressed={currentTopics.includes("clfzcfxvs000508l0cxhl4jwk")}
+            id={ids[5]}
+            aria-pressed={currentTopics.includes(ids[5])}
             onClick={getId}
           >
             #Sports
           </button>
 
           <button
-            id='clfzcgesv000608l04n7q2gd5'
-            aria-pressed={currentTopics.includes("clfzcgesv000608l04n7q2gd5")}
+            id={ids[6]}
+            aria-pressed={currentTopics.includes(ids[6])}
             onClick={getId}
           >
             #Technology

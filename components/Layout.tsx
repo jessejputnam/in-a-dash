@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 
 // import { useThemeContext } from "@/context/theme";
 
-import Header from "./sections/Header";
+import Header from "./sections/Header/Header";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { data: session, status } = useSession();

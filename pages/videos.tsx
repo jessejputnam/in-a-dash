@@ -1,16 +1,22 @@
 import Layout from "@/components/Layout";
 import Videos from "@/components/sections/Videos";
+import styled from "styled-components";
 
-import styles from "@/styles/pages/Videos.module.css";
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+`;
 
 export default function VideosPage() {
   return (
     <Layout>
-      <div className={styles.VideosPage}>
+      <Page>
         <h1>Videos</h1>
         <p>Discover the latest on YouTube</p>
         <Videos />
-      </div>
+      </Page>
     </Layout>
   );
 }

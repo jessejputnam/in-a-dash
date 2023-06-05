@@ -1,18 +1,10 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 
 import ContentCard from "../items/ContentCard/ContentCard";
-import Loading from "../Loading";
-
+import Loading from "../items/Loading/Loading";
 import { CardType } from "@/lib/types";
 
-const Results = styled.div`
-  margin-top: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-around;
-`;
+import Results from "./Results";
 
 export default function Videos() {
   const [data, setData] = useState<CardType[] | null>(null);

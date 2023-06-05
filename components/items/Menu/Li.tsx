@@ -8,8 +8,10 @@ const Li = styled.li`
       font-size: 2rem;
     }
   }
-  :hover {
-    background-color: var(--dim-gray);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--dim-gray);
+    }
   }
 
   @media only screen and (max-width: 600px) {

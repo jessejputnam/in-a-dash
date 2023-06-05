@@ -9,8 +9,10 @@ const Li = styled.li`
   font-size: 2rem;
   padding: 31px 25px;
 
-  & :hover {
-    color: var(--red);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--red);
+    }
   }
 `;
 

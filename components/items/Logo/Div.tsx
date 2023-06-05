@@ -8,21 +8,22 @@ const Div = styled.div`
   height: 60px;
   width: 70px;
   position: relative;
-  :hover {
-    cursor: pointer;
-    background-color: white;
-  }
-  &:hover {
-    ${Clip} {
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
       background-color: white;
-    }
 
-    ${Bar} {
-      background-color: var(--red);
-    }
+      ${Clip} {
+        background-color: white;
+      }
 
-    ${P} {
-      color: var(--red);
+      ${Bar} {
+        background-color: var(--red);
+      }
+
+      ${P} {
+        color: var(--red);
+      }
     }
   }
 `;
