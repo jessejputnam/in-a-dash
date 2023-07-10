@@ -8,7 +8,7 @@
   </p>
    
 <h4>
-    <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
+    <a href="https://in-a-dash.vercel.app/">View Demo</a>
   </h4>
 </div>
 
@@ -36,7 +36,7 @@
 ## About the Project
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+  <img src="/in-a-dash-prev.png" alt="screenshot" />
 </div>
 
 <!-- TechStack -->
