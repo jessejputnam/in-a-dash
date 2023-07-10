@@ -36,7 +36,7 @@
 ## About the Project
 
 <div align="center"> 
-  <img src="/in-a-dash-prev.png" alt="screenshot" style="box-shadow: 1px 1px 3px 2px gray;" />
+  <img src="/in-a-dash-prev.png" alt="screenshot" style="box-shadow: 1px 1px 5px gray;" />
 </div>
 
 <!-- TechStack -->
